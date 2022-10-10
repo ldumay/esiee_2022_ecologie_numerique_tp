@@ -1,6 +1,8 @@
 ## Récupérer les dépendances d'un projet python
 /!\ C'est la première fois que je fais un projet python, si jamais une commande ne fonctionne pas, n'hésitez pas à corriger le document
 
+Flask se lance en suivant les routes défini dans un fichier app.py
+
 Les 2 premières étapes servent à configurer un projet en local, afin d'installer les dépendances que pour ce projet.
 Si vous voulez installer les dépendances en global, vous pouvez les ignorer
 

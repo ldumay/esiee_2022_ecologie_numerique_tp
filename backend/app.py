@@ -1,5 +1,5 @@
 # Flask
-from flask import Flask
+from flask import Flask, request
 # Datetime
 from datetime import datetime
 # Regex
@@ -27,3 +27,18 @@ def hello_there(name):
 
     content = "Hello there, " + clean_name + "! It's " + formatted_now
     return content
+
+@app.get("/data")
+def get_data():
+	# recup les données de la bdd
+	# retourner les données
+	return {"status": "OK"}
+
+@app.post("/data")
+def post_data():
+	# Recup les données dans le post
+	request_json = request.get_json()
+	# ajouter les données dans la bdd
+	print(request_json)
+	# retourner un status
+	return {"status": "OK"}

@@ -1,2 +1,6 @@
-#IDE Jetbrains
+# IDE
 *.idea
+*.vscode
+
+# Python
+**/venv

@@ -58,3 +58,8 @@ flask db upgrade
 ```
 flask run
 ```
+
+```
+pip install flask
+pip install flask-swagger-ui
+```

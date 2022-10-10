@@ -37,8 +37,7 @@ def get_data():
 @app.post("/data")
 def post_data():
 	# Recup les données dans le post
-	request_json = request.get_json()
+	request_json = request.get_json(silent=True)
 	# ajouter les données dans la bdd
-	print(request_json)
 	# retourner un status
-	return {"status": "OK"}
+	return {"status": "OK", "value": request_json}

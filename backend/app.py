@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-	return "Hello World"
+    return "Hello World"
 
 @app.route("/<name>")
 def hello_there(name):
@@ -30,19 +30,19 @@ def hello_there(name):
 
 @app.get("/data")
 def get_data():
-	# recup les données de la bdd
-	# retourner les données
-	return {"status": "OK"}
+    # recup les données de la bdd
+    # retourner les données
+    return {"status": "OK"}
 
 @app.post("/data")
 def post_data():
-	# Recup les données dans le post
-	request_arg = request.args
-	request_form = request.form
-	# ajouter les données dans la bdd
-	# retourner un status
-	return {"status": "OK", "test":  {
-		"url_arg": request_arg,
-		"form_arg": request_form,
-		}
-	}
+    # Recup les données dans le post
+    request_arg = request.args
+    request_form = request.form
+    # ajouter les données dans la bdd
+    # retourner un status
+    return {"status": "OK", "test":  {
+        "url_arg": request_arg,
+        "form_arg": request_form,
+        }
+    }

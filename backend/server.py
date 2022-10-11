@@ -12,12 +12,12 @@ app = Flask(__name__)
 def get_time():
   
     # Returning an api for showing in  reactjs
-    return {
-        'Name':"Louis le Boss", 
+    return [{
+        'Name':"Louis le Boss",
         "Age":"22",
         "Date":x, 
         "programming":"python"
-        }
+        }]
   
       
 # Running app

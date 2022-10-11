@@ -49,21 +49,17 @@ def post_data():
 
 @app.get("/test")
 def get_test():
-	temp_cable = request.args.get('temp')
-	if (temp_cable):
-		temp = calcul_temp(temp_cable)
-	else:
-		temp = calcul_temp(24)
+	temp_cable = request.args.get('temp_cable', type=int) or request.form.get('temp_cable', type=int) or 24
+	temp_ambiant = request.args.get('temp_ambiant', type=int) or request.form.get('temp_ambiant', type=int) or 16
+	intensity = request.args.get('intensity', type=int) or request.form.get('intensity', type=int) or 500
+	wind_speed = request.args.get('wind_speed', type=int) or request.form.get('wind_speed', type=int) or 4
+	temp = calcul_temp(temp_cable, temp_ambiant, intensity, wind_speed)
 	return { "value": temp }
 
-def calcul_temp(temperature_cable: int):
+def calcul_temp(temperature_cable: int, temperature_ambiant: int, intensity: int, wind_speed: int):
 	# Récupèrer les dernières informations stockés dans la bdd
-	# 
-	#
-	wind_speed = 10
-	temperature_ambiant = 16
-	intensity = 500
 
+	# Calculer la température
 	part1 = ((wind_speed * wind_speed) / 1600) * 0.4 - 0.1
 	part2 = (temperature_cable - temperature_ambiant - ((pow(intensity, 1.4) / 73785) * 130))
 

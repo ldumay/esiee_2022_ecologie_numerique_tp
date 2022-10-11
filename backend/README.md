@@ -12,12 +12,13 @@ Si vous voulez installer les dépendances en global, vous pouvez les ignorer
 python -m venv venv
 
 - Utiliser la console lié à l'environnement local
-	https://docs.python.org/3/library/venv.html
+	- Source : https://docs.python.org/3/library/venv.html
 	- Mac / Linux / WSL :
 		source venv/bin/activate
 	- Windows :
-		CMD: venv/Scripts/activate.bat
-		PS: venv/Scripts/Activate.ps1
+		Défaut: . ./venv/Scripts/activate
+		CMD: ./venv/Scripts/activate.bat
+		PowerShell: ./venv/Scripts/Activate.ps1
 
 - Installer toutes les dépendances lié au projet
 pip install -r requirements.txt

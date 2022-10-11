@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+{%block title %}Home{% endblock%}
+
+{% block content %}
+<!--<form method="get" action="/">-->
+<!--    <h1>Hello</h1>-->
+<!--</form>-->
+<p>{{labels | safe}}</p>
+<p>{{ data | safe }}</p>
+<canvas id="lineChart" width="900" height="400">
+
+<!--        <script>-->
+<!--                let labels = {{labels | safe}};-->
+<!--                let data = {{ data | safe }};-->
+
+<!--                const Chart = require('chart.js');-->
+<!--                let ctx = document.getElementById("lineChart").getContext("2d");-->
+<!--                let lineChart = new Chart(ctx,{-->
+<!--                        type:"line",-->
+<!--                        data:{-->
+<!--                            labels:labels,-->
+<!--                            datasets: [-->
+<!--                                {-->
+<!--                                    label:"Data points",-->
+<!--                                    data: data,-->
+<!--                                    fill:false,-->
+<!--                                    lineTension:0.1-->
+<!--                                }-->
+<!--                            ]-->
+<!--                        },-->
+<!--                    options:{-->
+<!--                            responsive:false-->
+<!--                        }-->
+<!--                    })-->
+<!--        </script>-->
+</canvas>
+
+<button type="button" class="btn btn-outline-success" id="load_bp">load table</button>
+{% endblock %}

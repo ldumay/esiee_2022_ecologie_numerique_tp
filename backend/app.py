@@ -46,3 +46,27 @@ def post_data():
 		"form_arg": request_form,
 		}
 	}
+
+@app.get("/test")
+def get_test():
+	temp_cable = request.args.get('temp')
+	if (temp_cable):
+		temp = calcul_temp(temp_cable)
+	else:
+		temp = calcul_temp(24)
+	return { "value": temp }
+
+def calcul_temp(temperature_cable: int):
+	# Récupèrer les dernières informations stockés dans la bdd
+	# 
+	#
+	wind_speed = 10
+	temperature_ambiant = 16
+	intensity = 500
+
+	part1 = ((wind_speed * wind_speed) / 1600) * 0.4 - 0.1
+	part2 = (temperature_cable - temperature_ambiant - ((pow(intensity, 1.4) / 73785) * 130))
+
+	temperature_total = part1 * part2
+
+	return temperature_total

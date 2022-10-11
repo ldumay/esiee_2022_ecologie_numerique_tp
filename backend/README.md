@@ -1,100 +1,67 @@
 # ESIEE - 2022 - Ecologie numerique TP
 
-## Récupérer les dépendances d'un projet python
-/!\ C'est la première fois que je fais un projet python, si jamais une commande ne fonctionne pas, n'hésitez pas à corriger le document
+## Backend
+
+### 1 - Pré-requis :
+
+- Python : **v3.10.7**
+
+### 2 - Initialiser et récupérer les dépendances d'un projet python
+
+🚨 C'est la première fois que je fais un projet python, si jamais une commande ne fonctionne pas, n'hésitez pas à corriger le document
 
 Flask se lance en suivant les routes défini dans un fichier app.py
 
 Les 2 premières étapes servent à configurer un projet en local, afin d'installer les dépendances que pour ce projet.
 Si vous voulez installer les dépendances en global, vous pouvez les ignorer
 
-- Créer un environnement local
-python -m venv venv
+#### 2.1 - Créer un environnement local 
 
-- Utiliser la console lié à l'environnement local
-	https://docs.python.org/3/library/venv.html
-	- Mac / Linux / WSL :
-		source venv/bin/activate
-	- Windows :
-		CMD: venv/Scripts/activate.bat
-		PS: venv/Scripts/Activate.ps1
+```python -m venv venv```
 
-- Installer toutes les dépendances lié au projet
-pip install -r requirements.txt
+#### 2.2 - Utiliser la console lié à l'environnement local
 
-Lancer python flask
-python -m flask run
+Docs : https://docs.python.org/3/library/venv.html
 
----
-flask db init
-flask db migrate -m "entries table"
-flask db upgrade
-```
-
----
-
-# Autre 😉
-
-## Backend
-
-## Pré-requis :
-
-- Python : **v3.10.7**
-- Flask : **_**
-
-## But : API
-
-- Page de test : [http://localhost:8001/helloworld/](http://localhost:8001/helloworld/) ==> View : Hello world
-- Page de demonstration : [http://localhost:8001/demo/](http://localhost:8001/demo/) ==> View : [datas]
-
----
-
-### TESTS
+- Mac / Linux / WSL : 
 
 ```
-git clone https://github.com/gurkanakdeniz/example-flask-crud.git
-cd example-flask-crud/
-```
-
-#### Préparation et activation de l'environement :
-
-- sur Linux :
-
-```
-python3 -m venv venv
 source venv/bin/activate
 ```
 
-- sur Windows :
+- Windows - CMD : 
 
 ```
-py -m venv venv
-. .\venv\Scripts\activate
+Via CMD :
+venv/Scripts/activate.bat
+
+Via PS : 
+venv/Scripts/Activate.ps1
 ```
 
-#### Installation des pré-requis :
+#### 2.3 - Installer toutes les dépendances lié au projet 
 
 ```
-pip install --upgrade pip
 pip install -r requirements.txt
 ```
-export FLASK_APP=crudapp.py
 
-#### Préparation de la db :
+#### 2.4 - Lancer l'application backend python avec flask
 
 ```
-flask db init
+python -m flask run
+```
+
+---
+
+#### 2.5 - Création et migrationd de la base de données
+
+```
+python -m flask db init
 flask db migrate -m "entries table"
 flask db upgrade
 ```
 
-#### Démrrage du projet :
+### 3 - Accès à API
 
-```
-flask run
-```
-
-```
-pip install flask
-pip install flask-swagger-ui
-```
+- **[GET]** Test : [http://localhost:5000/test/](http://localhost:5000/test/) ==> View : [datas-test]
+- **[GET]** Datas : [http://localhost:5000/data/](http://localhost:5000/data/) ==> View : [datas]

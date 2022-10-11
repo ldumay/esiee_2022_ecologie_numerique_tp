@@ -32,12 +32,25 @@ source venv/bin/activate
 - Windows - CMD : 
 
 ```
+Par défaut :
+. ./venv/Scripts/activate
+
 Via CMD :
 venv/Scripts/activate.bat
 
 Via PS : 
 venv/Scripts/Activate.ps1
 ```
+
+### Bonus : Changer l'interpréteur pour VS Code
+
+` Ctrl + Maj + P `
+
+Sélectionner Python Interpreter
+
+Sélectionner `venv/Scripts/python.exe`
+
+Le code s'adaptera selon les modules installés dans l'environnement local
 
 #### 2.3 - Installer toutes les dépendances lié au projet 
 

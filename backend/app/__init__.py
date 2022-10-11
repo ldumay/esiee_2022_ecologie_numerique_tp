@@ -1,3 +1,5 @@
+# Fichier Init
+
 # OS
 import os
 # Datetime

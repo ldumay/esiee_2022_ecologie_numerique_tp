@@ -1,3 +1,5 @@
+# Fichier Models
+
 from app import db
 
 class Entry(db.Model):

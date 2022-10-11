@@ -26,7 +26,13 @@ pip install -r requirements.txt
 Lancer python flask
 python -m flask run
 
---- 
+---
+flask db init
+flask db migrate -m "entries table"
+flask db upgrade
+```
+
+---
 
 # Autre 😉
 

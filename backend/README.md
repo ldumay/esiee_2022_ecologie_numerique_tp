@@ -17,7 +17,9 @@ Si vous voulez installer les dépendances en global, vous pouvez les ignorer
 
 #### 2.1 - Créer un environnement local 
 
-```python -m venv venv```
+``
+python -m venv venv
+```
 
 #### 2.2 - Utiliser la console lié à l'environnement local
 
@@ -42,7 +44,7 @@ venv/Scripts/Activate.ps1
 #### 2.3 - Installer toutes les dépendances lié au projet 
 
 ```
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 #### 2.4 - Lancer l'application backend python avec flask
@@ -51,9 +53,7 @@ pip install -r requirements.txt
 python -m flask run
 ```
 
----
-
-#### 2.5 - Création et migrationd de la base de données
+#### 2.5 - Création et migration de la base de données
 
 ```
 python -m flask db init

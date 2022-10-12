@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper'; */
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 function App() {
 	// usestate for setting a javascript
@@ -18,67 +20,57 @@ function App() {
 		date: "",
 		programming: "",
 	});
+	const [file, setFile] = useState();
+	const fileReader = new FileReader();
 
-	// Using useEffect for single rendering
-	useEffect(() => {
-		// Using fetch to fetch the api from
-		// flask server it will be redirected to proxy
-		fetch("/data").then((res) =>
-			res.json().then((data) => {
-				// Setting a data from api
-				setdata({
-					name: data.Name,
-					age: data.Age,
-					date: data.Date,
-					programming: data.programming,
-				});
-			})
-		);
-	}, []);
+	const handleOnChange = (e) => {
+        setFile(e.target.files[0]);
+		console.log(e.target.files[0]);
+    };
+
+	const handleOnSubmit = (e) => {
+        e.preventDefault();
+
+        if (file) {
+            fileReader.onload = function (event) {
+                const csvOutput = event.target.result;
+				console.log(csvOutput);
+            };
+
+            fileReader.readAsText(file);
+        }
+    };
+
 
 	return (
 		<div className="App">
-			{/*<header className="App-header">*/}
-			{/*	<h1>React and flask</h1>*/}
-			{/*	/!* Calling a data from setdata for showing *!/*/}
-			{/*	<p>{data.name}</p>*/}
-			{/*	<p>{data.age}</p>*/}
-			{/*	<p>{data.date}</p>*/}
-			{/*	<p>{data.programming}</p>*/}
 
-			{/*</header>*/}
+			<header className="App-header">
+				<h1>React and flask</h1>
+				<form action=''>
+					<div>
+						<input
+							type={"file"}
+							id={"csvFileInput"}
+							accept={".csv"}
+							onChange={handleOnChange}
+						/>
+					</div>
+					<Button
+						variant="contained"
+						onClick={(e) => {
+							handleOnSubmit(e);
+						}}
+                	>
+                    IMPORT CSV
+                	</Button>
+				</form>
 
-{/* 			<body>
-				<TableContainer component={Paper}>
-					<Table sx={{ minWidth: 650 }} aria-label="simple table">
-						<TableHead>
-							<TableRow>
-								<TableCell>Dessert (100g serving)</TableCell>
-								<TableCell align="right">Calories</TableCell>
-								<TableCell align="right">Fat&nbsp;(g)</TableCell>
-								<TableCell align="right">Carbs&nbsp;(g)</TableCell>
-								<TableCell align="right">Protein&nbsp;(g)</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{data.map((data) => (
-								<TableRow
-									key={data.name}
-									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-								>
-									<TableCell component="th" scope="row">
-										{data.name}
-									</TableCell>
-									<TableCell align="right">{data.calories}</TableCell>
-									<TableCell align="right">{data.fat}</TableCell>
-									<TableCell align="right">{data.carbs}</TableCell>
-									<TableCell align="right">{data.protein}</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
-			</body> */}
+			</header>
+
+			<body>
+
+			</body>
 		</div>
 	);
 }

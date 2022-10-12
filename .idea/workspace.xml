@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228e4359-a106-4f54-83c8-a46ee9de4436" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/read_file.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/static/img/Esiee-it.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/static/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/static/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/static/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/display_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -123,7 +117,7 @@
       <updated>1665409249782</updated>
       <workItem from="1665409252947" duration="15802000" />
       <workItem from="1665493861790" duration="1085000" />
-      <workItem from="1665495322295" duration="2466000" />
+      <workItem from="1665495322295" duration="7627000" />
     </task>
     <servers />
   </component>

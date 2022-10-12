@@ -1,76 +1,109 @@
 // Importing modules
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
 import "./App.css";
-/* import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper'; */
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 function App() {
 	// usestate for setting a javascript
 	// object for storing and using data
-	const [data, setdata] = useState({
-		name: "",
-		age: 0,
-		date: "",
-		programming: "",
-	});
+	// const [data, setdata] = useState({
+	// 	Heure: "",
+	// 	Intencite: 0,
+	// 	temperature: 0,
+	// 	vitesse_vent: 0,
+	// });
+
 	const [file, setFile] = useState();
+	const [array, setArray] = useState([]);
+
 	const fileReader = new FileReader();
 
+	/** get the location the file, type and content */
 	const handleOnChange = (e) => {
         setFile(e.target.files[0]);
-		console.log(e.target.files[0]);
     };
 
+	/** event on submit get the content of the file*/
 	const handleOnSubmit = (e) => {
         e.preventDefault();
 
         if (file) {
             fileReader.onload = function (event) {
                 const csvOutput = event.target.result;
-				console.log(csvOutput);
+				csvFileToArray(csvOutput);
             };
-
             fileReader.readAsText(file);
         }
     };
 
+	/** convert the csv content to array of object */
+	const csvFileToArray = string => {
+		// get the fist line ['Heure', 'Intencite', 'temperature', 'vitesse vent\r']
+		const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
+		// get the other line as array of string ['1h,3A,16C,20km\r', '1h30,2.1A,16C,20km\r',...]
+		const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+		// console.log(csvHeader);
+		// console.log(csvRows);
+
+		const array = csvRows.map(i => {
+			const values = i.split(",");
+
+			return csvHeader.reduce(
+				(object, header, index) =>
+				{
+				  object[header] = values[index];
+				  // console.log(object)
+				  return object;
+				},
+				{});
+		});
+		setArray(array);
+  };
+
+  const headerKeys = Object.keys(Object.assign({}, ...array));
 
 	return (
 		<div className="App">
-
 			<header className="App-header">
-				<h1>React and flask</h1>
-				<form action=''>
-					<div>
-						<input
-							type={"file"}
-							id={"csvFileInput"}
-							accept={".csv"}
-							onChange={handleOnChange}
-						/>
-					</div>
+				<h1>Import csv file</h1>
+				<div>
+					<input
+						type={"file"}
+						id={"csvFileInput"}
+						accept={".csv"}
+						onChange={handleOnChange}
+					/>
+
 					<Button
 						variant="contained"
 						onClick={(e) => {
 							handleOnSubmit(e);
 						}}
-                	>
-                    IMPORT CSV
-                	</Button>
-				</form>
+					>
+					IMPORT
+					</Button>
+				</div>
+			<br />
+				<table>
+					<thead>
+					  <tr key={"header"}>
+						{headerKeys.map((key) => (
+						  <th key={key}>{key}</th>
+						))}
+					  </tr>
+					</thead>
 
+					<tbody>
+					  {array.map((item,index) => (
+						<tr key={index}>
+						  {Object.values(item).map((val,itemIndex) => (
+							<td key={itemIndex}>{val}</td>
+						  ))}
+						</tr>
+					  ))}
+					</tbody>
+				</table>
 			</header>
-
-			<body>
-
-			</body>
 		</div>
 	);
 }

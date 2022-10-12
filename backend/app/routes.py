@@ -17,7 +17,7 @@ def post_data():
 	# Recup les données dans le post
 	request_arg = request.args
 	request_form = request.form
-	
+
 	temp_cable = request.args.get('temp_cable', type=int) or request.form.get('temp_cable', type=int)
 	temp_ambiant = request.args.get('temp_ambiant', type=int) or request.form.get('temp_ambiant', type=int)
 	intensity = request.args.get('intensity', type=int) or request.form.get('intensity', type=int)
@@ -36,17 +36,19 @@ def post_data():
 def get_test():
 	temp_total = request.args.get('temp_cable', type=int) or 0
 	temp_table = []
-	for it in range(1, 40):
-		temp = calcul_temp(temp_total, 16, 2500, 0)
-		temp_total += temp
-		temp_table.append(temp_total)
-	return { "table": temp_table }
+	return {"table": temp_table}
+
+def calcul_temp_minute(temperature_cable: int, temperature_ambiant: int, intensity: int, wind_speed: int):
+	# Retourne la température du cable dans une simulation de 1 minute aux paramètres donnés
+	temperature = temperature_cable
+	for time in range(1, 60):
+		temperature = calcul_temp(temperature, temperature_ambiant, intensity, wind_speed)
+	return temperature
 
 def calcul_temp(temperature_cable: int, temperature_ambiant: int, intensity: int, wind_speed: int):
 	# Retourne le calcul de la température
 	# formule de chauffe du cable toutes les secondes selon les paramètres donnés
-	# temperature_cable dit etre la temperature de la dernière itération de la formule
-	# enregistrer toutes les minutes
+	# temperature_cable doit etre la temperature de la dernière itération de la formule
 	# demander pour code carbon
 	part1 = ((wind_speed * wind_speed) / 1600) * 0.4 - 0.1
 	part2 = (temperature_cable - temperature_ambiant - ((pow(intensity, 1.4) / 73785) * 130))

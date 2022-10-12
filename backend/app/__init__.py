@@ -16,9 +16,12 @@ from flask_migrate import Migrate
 # Application
 app = Flask(__name__)
 
-# BDD
+# Configuration de l'application
 app.config.from_object(Config)
+
+# BDD
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from app import routes, models
+# Routes
+from app import models, routes

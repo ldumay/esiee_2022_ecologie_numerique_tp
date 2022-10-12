@@ -1,7 +1,8 @@
 # Fichier Routes
 from flask import request, redirect
 from app import app, db
-from app.models import Entry
+from app.models import Vent
+from app.controllers import ControllerVent
 
 @app.get("/data")
 def get_data():
@@ -45,83 +46,33 @@ def calcul_temp(temperature_cable: int, temperature_ambiant: int, intensity: int
 
 	return temperature_total
 
-# - - - - - - - - - - - [BDD] - - - - - - - - - - - - -
 
-@app.route('/bdd')
-def index():
-    # entries = [
-    #     {
-    #         'id' : 1,
-    #         'title': 'test title 1',
-    #         'description' : 'test desc 1',
-    #         'status' : True
-    #     },
-    #     {
-    #         'id': 2,
-    #         'title': 'test title 2',
-    #         'description': 'test desc 2',
-    #         'status': False
-    #     }
-    # ]
-    entries = Entry.query.all()
-    return [ {entries} ]
 
-@app.route('/bdd/add', methods=['POST'])
-def add():
-    if request.method == 'POST':
-        form = request.form
-        title = form.get('title')
-        description = form.get('description')
-        if not title or description:
-            entry = Entry(title = title, description = description)
-            db.session.add(entry)
-            db.session.commit()
-            return redirect('/')
+# - - - - - - [BDD] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    return "of the jedi"
+@app.post("/bdd")
+def datas_all():
+    return ControllerVent.all
 
-@app.route('/bdd/update/<int:id>')
-def updateRoute(id):
-    if not id or id != 0:
-        entry = Entry.query.get(id)
-        if entry:
-            return render_template('update.html', entry=entry)
-
-    return "of the jedi"
+@app.route('/bdd/create', methods=['POST'])
+def datas_create():
+    form = request.form
+    heure = form.get('heure')
+    intencite = form.get('intencite')
+    temperature = form.get('temperature')
+    vitesse = form.get('vitesse')
+    return ControllerVent.create(heure, intencite, temperature, vitesse)
 
 @app.route('/bdd/update/<int:id>', methods=['POST'])
-def update(id):
-    if not id or id != 0:
-        entry = Entry.query.get(id)
-        if entry:
-            form = request.form
-            title = form.get('title')
-            description = form.get('description')
-            entry.title = title
-            entry.description = description
-            db.session.commit()
-        return redirect('/')
+def datas_update(id):
+    form = request.form
+    heure = form.get('heure')
+    intencite = form.get('intencite')
+    temperature = form.get('temperature')
+    vitesse = form.get('vitesse')
+    return ControllerVent.update(id, heure, intencite, temperature, vitesse)
 
-    return "of the jedi"
 
-@app.route('/bdd/delete/<int:id>')
-def delete(id):
-    if not id or id != 0:
-        entry = Entry.query.get(id)
-        if entry:
-            db.session.delete(entry)
-            db.session.commit()
-        return redirect('/')
-
-    return "of the jedi"
-
-@app.route('/bdd/turn/<int:id>')
-def turn(id):
-    if not id or id != 0:
-        entry = Entry.query.get(id)
-        if entry:
-            entry.status = not entry.status
-            db.session.commit()
-        return redirect('/')
-
-    return "of the jedi"
+@app.route('/bdd/delete/<int:id>', methods=['POST'])
+def datas_delete(id):
+    return ControllerVent.delete(id)

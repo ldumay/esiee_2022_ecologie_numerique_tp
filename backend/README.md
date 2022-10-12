@@ -17,7 +17,7 @@ Si vous voulez installer les dépendances en global, vous pouvez les ignorer
 
 #### 2.1 - Créer un environnement local 
 
-``
+```
 python -m venv venv
 ```
 
@@ -47,6 +47,12 @@ venv/Scripts/Activate.ps1
 python -m pip install -r requirements.txt
 ```
 
+> **Si besoin de mettre à jour de fichier `requirements.txt`** :
+> 
+> ```
+> python -m pip freeze > requirements.txt
+> ```
+
 #### 2.4 - Lancer l'application backend python avec flask
 
 ```
@@ -55,13 +61,53 @@ python -m flask run
 
 #### 2.5 - Création et migration de la base de données
 
-```
-python -m flask db init
-flask db migrate -m "entries table"
-flask db upgrade
-```
+**Attention** : Les commandes ci-desous sont effectuées si et seulement si le fichier app.bd n'est pas créé.
+
+> - Initialisation des fichiers de migrations de Flask
+> 
+> ```
+> python -m flask db init
+> ```
+>
+> - Génération de la bdd par migration
+>
+> ```
+> flask db migrate -m "initial db status"
+> ```
+>
+> - Mise à jour des modèles en BDD
+>
+> ```
+> flask db upgrade
+> ```
 
 ### 3 - Accès à API
 
-- **[GET]** Test : [http://localhost:5000/test/](http://localhost:5000/test/) ==> View : [datas-test]
-- **[GET]** Datas : [http://localhost:5000/data/](http://localhost:5000/data/) ==> View : [datas]
+- **[GET]** Test : [127.0.0.1:5000/test/](http://127.0.0.1:5000/test/) ==> View : [datas-test]
+- **[GET]** Datas : [127.0.0.1:5000/data/](http://127.0.0.1:5000/data/) ==> View : [datas]
+
+- **[GET]** BDD : `http://127.0.0.1:5000/bdd/` ==> View : [result]
+- **[POST]** BDD : `http://127.0.0.1:5000/bdd/create` ==> View : [result]
+- **[POST]** BDD : `http://127.0.0.1:5000/bdd/update/<id>` ==> View : [result]
+- **[POST]** BDD : `http://127.0.0.1:5000/bdd/delete/<id>` ==> View : [result]
+
+Variables de test
+
+```
+{
+"heure": 2022-01-01 00:00:03,
+"intencite": 2,
+"temperature": 2,
+"vitesse": 2,
+}
+```
+
+---[Recherches]---
+
+- [Flask by Example – Setting up Postgres, SQLAlchemy, and Alembic](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
+- [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+- [YOUTUBE - Learning Flask - Managing the database with flask-migrate and flask-sqlalchemy](https://www.youtube.com/watch?v=Ngxu0_xiZhQ)
+- [Declaring Models](https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/?highlight=float)
+- [Session Basics](https://docs.sqlalchemy.org/en/13/orm/session_basics.html)
+- [Python Try Except](https://www.w3schools.com/python/python_try_except.asp)
+- [L'opérateur conditionnel ternaire en Python](https://karbotronics.com/blog/2020-03-03-python-operateur-ternaire/)

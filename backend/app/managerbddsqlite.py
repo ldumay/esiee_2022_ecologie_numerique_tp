@@ -9,7 +9,8 @@ class ManagerBddSQLite:
 
     def __init__(self):
         self.file = 'bdd.db'
-        self.conn = None
+        # self.conn = None
+        # self.connection()
 
     # Vérification de la base de donnée
     def connection(self):
@@ -17,10 +18,10 @@ class ManagerBddSQLite:
             self.conn = sqlite3.connect(self.file)
             print('[BDD] Connected !')
         except Error as e:
-            self.close()
-            return None
             print('[BDD] Error !')
             print(e)
+            self.close()
+            return None
 
     # Exécuter une requète
     def getExecute(self, query):
@@ -30,10 +31,10 @@ class ManagerBddSQLite:
             self.conn.commit()
             return True
         except Error as e:
-            self.close()
-            return None
             print('[BDD] Error !')
             print(e)
+            self.close()
+            return None
 
     # Récupérer plusieurs données
     def getAll(self, query):
@@ -43,10 +44,10 @@ class ManagerBddSQLite:
             self.conn.commit()
             return cursor.fetchall()
         except Error as e:
-            self.close()
-            return None
             print('[BDD] Error !')
             print(e)
+            self.close()
+            return None
 
     # Récupérer une donnée
     def getOnce(self, query):
@@ -56,10 +57,10 @@ class ManagerBddSQLite:
             self.conn.commit()
             return cursor.fetchone()
         except Error as e:
-            self.close()
-            return None
             print('[BDD] Error !')
             print(e)
+            self.close()
+            return None
 
     # Fermer la connexion
     def close(self):

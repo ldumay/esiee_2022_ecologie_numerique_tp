@@ -6,7 +6,8 @@ from app.models import Vent
 class ControllerVent():
 
     # All object vent :
-    def all ():
+    @staticmethod
+    def all():
         try:
             if len(db.session.query(Vent).all())>0:
                 return [ { db.session.query(Vent).all() } ]
@@ -16,9 +17,9 @@ class ControllerVent():
             return "[Vent-Create] - Error"
 
     # Create object vent :
-    def create (heure, intencite, temperature, vitesse):
-        vent_1 = Vent(heure, intencite, temperature, vitesse,
-        )
+    @staticmethod
+    def create(heure, intencite, temperature, vitesse):
+        vent_1 = Vent(heure, intencite, temperature, vitesse)
         db.session.add(vent_1)
         db.session.commit()
         #vent_2 = db.session.query(Vent).filter_by(heure=heure, intencite=intencite, temperature=temperature, vitesse=vitesse).get
@@ -30,6 +31,7 @@ class ControllerVent():
             return "[Vent-Create] - Error"
     
     # Update object vent :
+    @staticmethod
     def update (id, heure, intencite, temperature, vitesse):
         vent = Vent.query.get(id)
         if vent:
@@ -39,11 +41,12 @@ class ControllerVent():
             vitesse = vent.vitesse if not vitesse else 0
             db.session.commit()
         try:
-            return "[Vent-Update] - Vent id="+id+" updated !"
+            return "[Vent-Update] - Vent id=" + id + " updated !"
         except:
             return "[Vent-Update] - Error"
 
     # Delete object vent :
+    @staticmethod
     def delete (id):
         db.session.query(Vent).filter(Vent.id==id).delete()
         db.session.commit()

@@ -1,8 +1,8 @@
 # Fichier Routes
 from flask import request, redirect
-from app import app, db
-from app.models import Vent
-from app.controllers import ControllerVent
+from app import app
+# from app.models import Vent
+# from app.controllers import ControllerVent
 
 @app.get("/data")
 def get_data():
@@ -69,7 +69,9 @@ def sample_methodes():
 @app.get("/bdd")
 def datas_all():
     if request.method=='GET':
-        return ControllerVent.all
+        result = ''
+        # result = ControllerVent.all()
+        return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
@@ -80,7 +82,9 @@ def datas_create():
         intencite = request.form.get('intencite')
         temperature = request.form.get('temperature')
         vitesse = request.form.get('vitesse')
-        return ControllerVent.create(heure, intencite, temperature, vitesse)
+        result = ''
+        # result = ControllerVent.create(heure, intencite, temperature, vitesse)
+        return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
@@ -92,13 +96,17 @@ def datas_update(id):
         intencite = form.get('intencite')
         temperature = form.get('temperature')
         vitesse = form.get('vitesse')
-        return ControllerVent.update(id, heure, intencite, temperature, vitesse)
+        result = ''
+        # result = ControllerVent.update(id, heure, intencite, temperature, vitesse)
+        return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
 @app.delete('/bdd/delete/<int:id>')
 def datas_delete(id):
     if request.method=='PUT':
-        return ControllerVent.delete(id)
+        result = ''
+        # result = ControllerVent.delete(id)
+        return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"

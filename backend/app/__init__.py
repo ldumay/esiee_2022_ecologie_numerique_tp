@@ -1,10 +1,9 @@
 # Fichier Init
 
 import os, re, sqlite3
-import managerbddsqlite
 from datetime import datetime
 from sqlite3 import Error
-from managerbddsqlite import ManagerBddSQLite
+from app.managerbddsqlite import ManagerBddSQLite
 from flask import Flask, request, session
 from app.config import Config
 
@@ -56,5 +55,11 @@ bdd.close()
 
 # - - - [BDD] - - - - - - -
 
+# Rajout des anciens import pour éviter les messages d'erreur sur beaucoup d'autre fichier
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_migrate import Migrate
+# db = SQLAlchemy(app)
+# migrate = Migrate(app, db)
+
 # Routes
-from app import models, routes
+from app import routes

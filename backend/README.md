@@ -63,6 +63,19 @@ pip install -r requirements.txt
 ```
 python -m flask run
 ```
+---
+
+Lancer avec le debug :
+
+Changer dans `app.py`
+
+> app.run(debug=True)
+
+Éxécuter avec le debug
+
+```
+python app.py
+```
 
 ---
 

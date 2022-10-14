@@ -6,8 +6,8 @@ import os
 from datetime import datetime
 # Regex
 import re
-# Flask - Imports Flask, request
-from flask import Flask, request
+# Flask - Imports Flask
+from flask import Flask
 # BDD - Imports Config, SQLAlchemy, Migrate
 from app.config import Config
 from flask_sqlalchemy import SQLAlchemy

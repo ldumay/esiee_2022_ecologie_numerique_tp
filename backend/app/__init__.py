@@ -5,14 +5,12 @@ from datetime import datetime
 from sqlite3 import Error
 from app.managerbddsqlite import ManagerBddSQLite
 from flask import Flask, request, session
-from app.config import Config
 
 # Application
 app = Flask(__name__)
 
 # Configuration de l'application
 app.config["DEBUG"] = True
-app.config.from_object(Config)
 
 # - - - [BDD] - - - - - - -
 

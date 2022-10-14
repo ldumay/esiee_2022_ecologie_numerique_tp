@@ -1,7 +1,6 @@
 import sqlite3
 from sqlite3 import Error
 
-
 # Gestionnaire de BDD SQLite
 # https://python.doctor/page-database-data-base-donnees-query-sql-mysql-postgre-sqlite
 

@@ -8,17 +8,16 @@ class ControllerVent():
     # All object vent :
     def all ():
         try:
-            return [ { db.session.query(Vent).all() } ]
+            if len(db.session.query(Vent).all())>0:
+                return [ { db.session.query(Vent).all() } ]
+            else:
+                return "Il n'y a pas de données dans la BDD."
         except:
             return "[Vent-Create] - Error"
 
     # Create object vent :
     def create (heure, intencite, temperature, vitesse):
-        vent_1 = Vent(
-            heure = heure,
-            intencite = intencite,
-            temperature = temperature,
-            vitesse = vitesse,
+        vent_1 = Vent(heure, intencite, temperature, vitesse,
         )
         db.session.add(vent_1)
         db.session.commit()

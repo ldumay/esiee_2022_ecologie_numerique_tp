@@ -1,9 +1,11 @@
 # Fichier Routes
-
+from flask import request, redirect
 from app import app
 from flask import request
 
 from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
+# from app.models import Vent
+# from app.controllers import ControllerVent
 
 @app.get("/data")
 def get_data():
@@ -42,3 +44,68 @@ def post_data():
 def get_test():
 	test = calcul_scipy_temp(10, 0, 16, 200, 4)
 	return {"test": test}
+
+
+
+# - - - - - - [Exemple de gestion de méthodes] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+@app.route('/sample_methodes', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def sample_methodes():
+    if request.method=='GET':
+        return "Cet méthode est un GET 😉👌"
+    elif request.method=='POST':
+        return " Cet méthode est un GET 😉👌"
+    elif request.method=='PUT':
+        return " Cet méthode est un PUT 😉👌"
+    elif request.method=='DELETE':
+        return " Cet méthode est un DELETE 😉👌"
+    else:
+        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+
+# - - - - - - [BDD] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# GET - Récupération du contenu de la BDD
+@app.get("/bdd")
+def datas_all():
+    if request.method=='GET':
+        result = ''
+        # result = ControllerVent.all()
+        return result
+    else:
+        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+
+@app.post('/bdd/create')
+def datas_create():
+    if request.method=='POST':
+        heure = request.form.get('heure')
+        intencite = request.form.get('intencite')
+        temperature = request.form.get('temperature')
+        vitesse = request.form.get('vitesse')
+        result = ''
+        # result = ControllerVent.create(heure, intencite, temperature, vitesse)
+        return result
+    else:
+        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+
+@app.put('/bdd/update/<int:id>')
+def datas_update(id):
+    if request.method=='PUT':
+        form = request.form
+        heure = form.get('heure')
+        intencite = form.get('intencite')
+        temperature = form.get('temperature')
+        vitesse = form.get('vitesse')
+        result = ''
+        # result = ControllerVent.update(id, heure, intencite, temperature, vitesse)
+        return result
+    else:
+        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+
+@app.delete('/bdd/delete/<int:id>')
+def datas_delete(id):
+    if request.method=='PUT':
+        result = ''
+        # result = ControllerVent.delete(id)
+        return result
+    else:
+        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"

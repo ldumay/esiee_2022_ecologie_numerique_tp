@@ -1,24 +1,65 @@
 # Fichier Init
 
-# OS
-import os
-# Datetime
+import os, re, sqlite3
 from datetime import datetime
-# Regex
-import re
-# Flask - Imports Flask
-from flask import Flask
-# BDD - Imports Config, SQLAlchemy, Migrate
+from sqlite3 import Error
+from app.managerbddsqlite import ManagerBddSQLite
+from flask import Flask, request, session
 from app.config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 
 # Application
 app = Flask(__name__)
 
-# BDD
+# Configuration de l'application
+app.config["DEBUG"] = True
 app.config.from_object(Config)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
-from app import routes, models
+# - - - [BDD] - - - - - - -
+
+# Init BDD
+bdd = ManagerBddSQLite()
+
+# Connexion BDD
+bdd.connection()
+
+# Check BDD
+try:
+    table_vent = """CREATE TABLE IF NOT EXISTS vent(
+        id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+        temperature_cable FLOAT,
+        temperature_ambiant FLOAT,
+        intensity FLOAT,
+        wind_speed FLOAT
+    )"""
+    bdd.getExecute(table_vent)
+    print("[BDD] Vérification de la table - OK !")
+except Error as e:
+    print('[BDD] Error !')
+    print(e)
+
+# Insert - One Data
+try:
+    new_vent_1 = """INSERT INTO vent 
+        (temperature_cable, temperature_ambiant, intensity, wind_speed)
+        VALUES
+        (0, 0, 0, 0)
+    """
+    bdd.getExecute(new_vent_1)
+    print("[BDD] Insertion dans la table - OK !")
+except Error as e:
+    print('[BDD] Error !')
+    print(e)
+
+# Close
+bdd.close()
+
+# - - - [BDD] - - - - - - -
+
+# Rajout des anciens import pour éviter les messages d'erreur sur beaucoup d'autre fichier
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_migrate import Migrate
+# db = SQLAlchemy(app)
+# migrate = Migrate(app, db)
+
+# Routes
+from app import routes

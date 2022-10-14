@@ -3,16 +3,20 @@
 from app import app
 from flask import request
 
-from app.calcul_temp import calcul_temp, calcul_temp_minutes
+from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
 
 @app.get("/data")
 def get_data():
-	# retourner les données
-	temp = calcul_temp(60, 16, 500, 4)
-	return {
-		"status": "OK",
-		"temp": temp
-	}
+	minutes = request.args.get('time', type=int) or request.form.get('time', type=int) or 30
+	temp_cable = request.args.get('temp_cable', type=int) or request.form.get('temp_cable', type=int) or 0
+	temp_ambiant = request.args.get('temp_ambiant', type=int) or request.form.get('temp_ambiant', type=int) or 16
+	intensity = request.args.get('intensity', type=int) or request.form.get('intensity', type=int) or 200
+	wind_speed = request.args.get('wind_speed', type=int) or request.form.get('wind_speed', type=int) or 4
+
+	# calcul sur les 30 prochaines minutes
+	temp = calcul_temp_minutes(minutes, temp_cable, temp_ambiant, intensity, wind_speed)
+
+	return {"temperature": temp}
 
 @app.post("/data")
 def post_data():
@@ -36,12 +40,5 @@ def post_data():
 
 @app.get("/test")
 def get_test():
-	temp_cable = request.args.get('temp_cable', type=int) or request.form.get('temp_cable', type=int) or 0
-	temp_ambiant = request.args.get('temp_ambiant', type=int) or request.form.get('temp_ambiant', type=int) or 16
-	intensity = request.args.get('intensity', type=int) or request.form.get('intensity', type=int) or 200
-	wind_speed = request.args.get('wind_speed', type=int) or request.form.get('wind_speed', type=int) or 4
-
-	# calcul sur les 30 prochaines minutes
-	temp = calcul_temp_minutes(30, temp_cable, temp_ambiant, intensity, wind_speed)
-
-	return {"temperature": temp}
+	test = calcul_scipy_temp(10, 0, 16, 200, 4)
+	return {"test": test}

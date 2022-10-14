@@ -59,28 +59,6 @@ python -m pip install -r requirements.txt
 python -m flask run
 ```
 
-#### 2.5 - Création et migration de la base de données
-
-**Attention** : Les commandes ci-desous sont effectuées si et seulement si le fichier app.bd n'est pas créé.
-
-> - Initialisation des fichiers de migrations de Flask
-> 
-> ```
-> python -m flask db init
-> ```
->
-> - Génération de la bdd par migration
->
-> ```
-> flask db migrate -m "initial db status"
-> ```
->
-> - Mise à jour des modèles en BDD
->
-> ```
-> flask db upgrade
-> ```
-
 ### 3 - Accès à API
 
 - **[GET]** Test : [127.0.0.1:5000/test/](http://127.0.0.1:5000/test/) ==> View : [datas-test]

@@ -23,5 +23,5 @@ def csv_to_json(csvFilePath, jsonFilePath):
 
 
 csvFilePath = r'csvTest.csv'
-jsonFilePath = r'jsonTest.csv'
+jsonFilePath = r'jsonTest.json'
 csv_to_json(csvFilePath, jsonFilePath)

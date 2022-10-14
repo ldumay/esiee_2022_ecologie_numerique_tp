@@ -28,5 +28,5 @@
 **yarn-error.log*
 
 # BDD & Migrations
-**app.db
+**/*.db
 **migrations

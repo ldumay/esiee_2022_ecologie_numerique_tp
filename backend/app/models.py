@@ -1,5 +1,6 @@
 # Fichier Models
-from app import db
+from backend.app import db
+
 
 # Entité - Vent
 class Vent(db.Model):

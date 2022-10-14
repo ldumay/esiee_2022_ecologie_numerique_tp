@@ -1,4 +1,4 @@
-from backend.app.routes import calcul_temp
+from backend.app.calcul_temp import calcul_temp
 
 
 class Cable:

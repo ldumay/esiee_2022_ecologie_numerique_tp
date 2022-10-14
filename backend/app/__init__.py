@@ -2,10 +2,11 @@
 
 import os, re, sqlite3
 from datetime import datetime
-from sqlite3 import Error
-from app.managerbddsqlite import ManagerBddSQLite
 from flask import Flask, request, session
-from app.config import Config
+from sqlite3 import Error
+
+from backend.app.managerbddsqlite import ManagerBddSQLite
+from backend.app.config import Config
 
 # Application
 app = Flask(__name__)

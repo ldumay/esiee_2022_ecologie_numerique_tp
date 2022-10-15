@@ -92,26 +92,22 @@ def getCable():
 # POST - Création d'un contenu cable et ajout dans la table Cable
 @app.post('/cable')
 def createCable():
-	id = request.args.get('id', type=int) or request.form.get('id', type=int)
-	if id:
-		temperature_cable = request.form.get('temperature_cable')
-		temperature_ambiant = request.form.get('temperature_ambiant')
-		intensity = request.form.get('intensity')
-		wind_speed = request.form.get('wind_speed')
-		result = cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
-		return result
-	else:
-		return "id not define", 404
+	temperature_cable = request.form.get('temperature_cable', type=float) or 0
+	temperature_ambiant = request.form.get('temperature_ambiant', type=float) or 0
+	intensity = request.form.get('intensity', type=float) or 0
+	wind_speed = request.form.get('wind_speed', type=float) or 0
+	result = cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
+	return result
 
 # PUT - Mise à jour d'un contenu cable dans la table Cable
 @app.put('/cable')
 def updateCable():
 	id = request.args.get('id', type=int) or request.form.get('id', type=int)
 	if id:
-		temperature_cable = request.form.get('temperature_cable')
-		temperature_ambiant = request.form.get('temperature_ambiant')
-		intensity = request.form.get('intensity')
-		wind_speed = request.form.get('wind_speed')
+		temperature_cable = request.form.get('temperature_cable', type=float) or 0
+		temperature_ambiant = request.form.get('temperature_ambiant', type=float) or 0
+		intensity = request.form.get('intensity', type=float) or 0
+		wind_speed = request.form.get('wind_speed', type=float) or 0
 		result = cable.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
 		return result
 	else:

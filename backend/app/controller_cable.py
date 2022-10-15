@@ -31,7 +31,7 @@ class ControllerCable:
 			return "[Cable-Get] - La donnée n'a pas été trouvée dans la BDD."
 
 	# Méthode de création d'une donnée
-	def create(self, temperature_cable, temperature_ambiant, intensity, wind_speed):
+	def create(self, temperature_cable: float, temperature_ambiant: float, intensity: float, wind_speed: float):
 		try:
 			result = self.BDDmanager.insertCable(temperature_cable, temperature_ambiant, intensity, wind_speed)
 			if result:
@@ -42,7 +42,7 @@ class ControllerCable:
 			return "[Cable-Create] - Error"
 
 	# Méthode de mise à jour d'une donnée
-	def update(self, id, temperature_cable, temperature_ambiant, intensity, wind_speed):
+	def update(self, id, temperature_cable: float, temperature_ambiant: float, intensity: float, wind_speed: float):
 		result = self.BDDmanager.updateCable(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
 		if result:
 			return "[Cable-Update] - La donnée a bien été modifiée dans la BDD."

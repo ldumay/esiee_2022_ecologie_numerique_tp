@@ -59,16 +59,16 @@ def post_data():
 # Exemple de gestion de méthodes
 @app.route('/sample_methodes', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def sample_methodes():
-    if request.method=='GET':
-        return "Cet méthode est un GET 😉👌"
-    elif request.method=='POST':
-        return " Cet méthode est un GET 😉👌"
-    elif request.method=='PUT':
-        return " Cet méthode est un PUT 😉👌"
-    elif request.method=='DELETE':
-        return " Cet méthode est un DELETE 😉👌"
-    else:
-        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+	if request.method=='GET':
+		return "Cet méthode est un GET 😉👌"
+	elif request.method=='POST':
+		return " Cet méthode est un GET 😉👌"
+	elif request.method=='PUT':
+		return " Cet méthode est un PUT 😉👌"
+	elif request.method=='DELETE':
+		return " Cet méthode est un DELETE 😉👌"
+	else:
+		return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
 
 # - - - [Cable] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -76,56 +76,53 @@ def sample_methodes():
 # GET - Récupération du contenu de la table Cable
 @app.get("/cables")
 def getCables():
-    if request.method=='GET':
-        result = ''
-        result = cable.getAll()
-        return result
-    else:
-        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+	result = cable.getAll()
+	return result
 
 # GET - Récupération du contenu cable de la table Cable
-@app.get("/cable/<int:id>")
-def getCable(id):
-    if request.method=='GET':
-        result = ''
-        result = cable.getCable(id)
-        return result
-    else:
-        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+@app.get("/cable")
+def getCable():
+	id = request.args.get('id', type=int) or request.form.get('id', type=int)
+	if id:
+		result = cable.getCable(id)
+		return result
+	else:
+		return "id not define", 404
 
 # POST - Création d'un contenu cable et ajout dans la table Cable
-@app.post('/bdd/create')
+@app.post('/cable')
 def createCable():
-    if request.method=='POST':
-        temperature_cable = request.form.get('temperature_cable')
-        temperature_ambiant = request.form.get('temperature_ambiant')
-        intensity = request.form.get('intensity')
-        wind_speed = request.form.get('wind_speed')
-        result = cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
-        return result
-    else:
-        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+	id = request.args.get('id', type=int) or request.form.get('id', type=int)
+	if id:
+		temperature_cable = request.form.get('temperature_cable')
+		temperature_ambiant = request.form.get('temperature_ambiant')
+		intensity = request.form.get('intensity')
+		wind_speed = request.form.get('wind_speed')
+		result = cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
+		return result
+	else:
+		return "id not define", 404
 
 # PUT - Mise à jour d'un contenu cable dans la table Cable
-@app.put('/bdd/update/<int:id>')
-def updateCable(id):
-    if request.method=='PUT':
-        temperature_cable = request.form.get('temperature_cable')
-        temperature_ambiant = request.form.get('temperature_ambiant')
-        intensity = request.form.get('intensity')
-        wind_speed = request.form.get('wind_speed')
-        result = ''
-        result = cable.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
-        return result
-    else:
-        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+@app.put('/cable')
+def updateCable():
+	id = request.args.get('id', type=int) or request.form.get('id', type=int)
+	if id:
+		temperature_cable = request.form.get('temperature_cable')
+		temperature_ambiant = request.form.get('temperature_ambiant')
+		intensity = request.form.get('intensity')
+		wind_speed = request.form.get('wind_speed')
+		result = cable.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
+		return result
+	else:
+		return "id not define", 404
 
 # DELETE - Supprimer d'un contenu cable dans la table Cable
-@app.delete('/bdd/delete/<int:id>')
-def deleteCable(id):
-    if request.method=='PUT':
-        result = ''
-        result = cable.delete(id)
-        return result
-    else:
-        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+@app.delete('/cable')
+def deleteCable():
+	id = request.args.get('id', type=int) or request.form.get('id', type=int)
+	if id:
+		result = cable.delete(id)
+		return result
+	else:
+		return "id not define", 404

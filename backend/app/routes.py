@@ -76,8 +76,8 @@ def sample_methodes():
 # GET - Récupération du contenu de la table Cable
 @app.get("/cables")
 def getCables():
-	result = cable.getAll()
-	return result
+	result = cable.getAllCables()
+	return { "list": result }
 
 # GET - Récupération du contenu cable de la table Cable
 @app.get("/cable")

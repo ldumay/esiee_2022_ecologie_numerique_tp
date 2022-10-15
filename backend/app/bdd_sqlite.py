@@ -11,13 +11,12 @@ class BddSQLite:
     # Constructeur
     def __init__(self):
         self.file = 'bdd.db'
-        # self.conn = None
         # self.connection()
 
     # Vérification de la base de donnée
     def connection(self):
         try:
-            self.conn = sqlite3.connect(self.file)
+            self.conn = sqlite3.connect(self.file, check_same_thread=False)
             print('[BDD] Connected !')
         except Error as err:
             print('[BDD] Error !')

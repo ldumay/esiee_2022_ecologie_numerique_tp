@@ -12,10 +12,13 @@ class ControllerCable:
 		self.BDDmanager = manager
 
 	# Méthode de récupération de toutes les données
-	def getAll(self):
+	def getAllCables(self):
 		result = self.BDDmanager.getAllCable()
 		if (result) or (len(result) > 0):
-			return result
+			result_string = []
+			for cable in result:
+				result_string.append(str(cable))
+			return result_string
 		else:
 			return "[Cable-All] - Il n'y a pas de données dans la BDD."
 
@@ -23,7 +26,7 @@ class ControllerCable:
 	def getCable(self, id: int):
 		result = self.BDDmanager.getCable(id)
 		if result:
-			return result
+			return str(result)
 		else:
 			return "[Cable-Get] - La donnée n'a pas été trouvée dans la BDD."
 

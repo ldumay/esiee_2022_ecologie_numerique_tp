@@ -31,9 +31,9 @@ class BddSQLiteManager:
 			)"""
 			self.bdd.getExecute(table_vent)
 			print("[BDD] Vérification de la table CABLE - OK !")
-		except Error as e:
+		except Error as err:
 			print('[BDD] Error !')
-			print(e)
+			print(err)
 
 		# Insertion des données la table Cable de la BDD
 		try:
@@ -44,36 +44,36 @@ class BddSQLiteManager:
 			"""
 			self.bdd.getExecute(new_vent_1)
 			print("[BDD] Insertion dans la table CABLE - OK !")
-		except Error as e:
+		except Error as err:
 			print('[BDD] Error !')
-			print(e)
+			print(err)
 
 		# Lecture des données de la table Cable de la BDD
 		try:
 			query = "SELECT * FROM cable"
 			print(self.bdd.getAll(query))
 			print("[BDD] Lecture de la table CABLE - OK !")
-		except Error as e:
+		except Error as err:
 			print('[BDD] Error !')
-			print(e)
+			print(err)
 		
 		# Lecture du dernier enregistrement de la table Cable de la BDD
 		try:
-			query = "SELECT * FROM cable ORDER BY id DESC LIMIT 1"
-			print(self.bdd.getOnce(query))
+			result = self.getLastAddedCable()
+			print(result)
 			print("[BDD] Lecture du dernier enregistrement de la table CABLE - OK !")
-		except Error as e:
+		except Error as err:
 			print('[BDD] Error !')
-			print(e)
+			print(err)
 
 		#Lecture du nombre d'enregistrement de la table Cable de la BDD
 		try:
-			query = "SELECT COUNT(*) as number FROM cable"
-			print(self.bdd.count(query))
+			result = self.getNumberCable()
+			print(result)
 			print("[BDD] Lecture du nombre d'enregistrement de la table CABLE - OK !")
-		except Error as e:
+		except Error as err:
 			print('[BDD] Error !')
-			print(e)
+			print(err)
 
 	def getBDD(self):
 		return self.bdd
@@ -84,31 +84,38 @@ class BddSQLiteManager:
 		return result
 	
 	def getCable(self, id: int):
-		query = "SELECT * FROM cable WHERE id = " + str(id)
-		print(query, flush=True)
-		query.format(id)
-		print(query, flush=True)
+		query = "SELECT * FROM cable WHERE id = {}".format(id)
+		# print(query, flush=True)
 		result = self.getBDD().getOnce(query=query)
+		return result
+	
+	def getLastAddedCable(self):
+		query = "SELECT * FROM cable ORDER BY id DESC LIMIT 1"
+		result = self.getBDD().getOnce(query=query)
+		return result
+	
+	def getNumberCable(self):
+		query = "SELECT COUNT(*) as number FROM cable"
+		result = self.getBDD().count(query=query)
 		return result
 
 	def insertCable(self, temp_cable, temp_amb, intensity, wind_speed):
 		query = """INSERT INTO cable
 			(temperature_cable, temperature_ambiant, intensity, wind_speed)
 			VALUES
-			({temp_cable}, {temp_amb}, {intensity}, {wind_speed})
-		"""
-		query.format(temp_cable, temp_amb, intensity, wind_speed)
+			({}, {}, {}, {})
+		""".format(temp_cable, temp_amb, intensity, wind_speed)
 		result = self.getBDD().getExecute(query=query)
 		return result
 
 	def updateCable(self, id: int, temp_cable, temp_amb, intensity, wind_speed):
-		query = """UPDATE cable SET temperature_cable = {temp_cable}, temperature_ambiant = {temp_amb}, intensity = {intensity}, wind_speed = {wind_speed} WHERE id = {id}"""
-		query.format(id, temp_cable, temp_amb, intensity, wind_speed)
+		query = """UPDATE cable
+			SET temperature_cable = {}, temperature_ambiant = {}, intensity = {}, wind_speed = {}
+			WHERE id = {}""".format(temp_cable, temp_amb, intensity, wind_speed, id)
 		result = self.getBDD().getExecute(query=query)
 		return result
 
 	def deleteCable(self, id: int):
-		query = """DELETE FROM cable WHERE id = {id}"""
-		query.format(id)
+		query = """DELETE FROM cable WHERE id = {}""".format(id)
 		result = self.getBDD().getExecute(query=query)
 		return result

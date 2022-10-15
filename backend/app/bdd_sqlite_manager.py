@@ -84,8 +84,10 @@ class BddSQLiteManager:
 		return result
 	
 	def getCable(self, id: int):
-		query = "SELECT * FROM cable WHERE id = {id}"
+		query = "SELECT * FROM cable WHERE id = " + str(id)
+		print(query, flush=True)
 		query.format(id)
+		print(query, flush=True)
 		result = self.getBDD().getOnce(query=query)
 		return result
 

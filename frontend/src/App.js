@@ -23,14 +23,14 @@ function App(props) {
 
 	const fileReader = new FileReader();
 
-	// useEffect(()=>{
-	// 	fetch("/testapps").then(response =>
-	// 		response.json().then(data => {
-	// 			setCalculatedData(data)
-	// 			console.log(data)
-	// 		})
-	// 	);
-	// },[]);
+	useEffect(()=>{
+		fetch("/data").then(response =>
+			response.json().then(data => {
+				setCalculatedData(data)
+				console.log(data)
+			})
+		);
+	},[]);
 
 
 	const calculate = () =>{

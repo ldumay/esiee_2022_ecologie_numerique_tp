@@ -33,6 +33,7 @@ def get_data():
     temp = cable.getNextTemperature(minutes)
     return {"temperature": temp}
 
+
 # Envoyer de données
 @app.post("/data")
 def post_data():
@@ -41,12 +42,11 @@ def post_data():
     temp_ambiant = request.args.get('temp_ambiant', type=int) or request.form.get('temp_ambiant', type=int) or 16
     intensity = request.args.get('intensity', type=int) or request.form.get('intensity', type=int) or 200
     wind_speed = request.args.get('wind_speed', type=int) or request.form.get('wind_speed', type=int) or 4
-    
+
     # calcul sur les 30 prochaines minutes
     temp = calcul_temp_minutes(minutes, temp_cable, temp_ambiant, intensity, wind_speed)
 
     return {"temperature": temp}
-
 
 
 # - - - [Exemple de gestion de méthodes] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -54,13 +54,13 @@ def post_data():
 # Exemple de gestion de méthodes
 @app.route('/sample_methodes', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def sample_methodes():
-    if request.method=='GET':
+    if request.method == 'GET':
         return "Cet méthode est un GET 😉👌"
-    elif request.method=='POST':
+    elif request.method == 'POST':
         return " Cet méthode est un GET 😉👌"
-    elif request.method=='PUT':
+    elif request.method == 'PUT':
         return " Cet méthode est un PUT 😉👌"
-    elif request.method=='DELETE':
+    elif request.method == 'DELETE':
         return " Cet méthode est un DELETE 😉👌"
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
@@ -72,7 +72,7 @@ def sample_methodes():
 @app.get("/cables")
 def getCables():
     result = cable.getAllCables()
-    return { "list": result }
+    return {"list": result}
 
 
 # GET - Récupération du contenu cable de la table Cable

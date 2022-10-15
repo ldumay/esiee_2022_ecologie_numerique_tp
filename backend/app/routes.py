@@ -1,10 +1,8 @@
 # Fichier Routes
 from app import app, cable
-from flask import request, redirect
+from flask import request
 
 from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
-from app.model_cable import Cable
-from app.controller_cable import ControllerCable
 
 
 # - - - [Test] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

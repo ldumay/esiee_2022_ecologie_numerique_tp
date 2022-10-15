@@ -1,5 +1,4 @@
 # Fichier - Controlle - Cable
-from .model_cable import Cable
 
 from app.bdd_sqlite_manager import BddSQLiteManager
 

@@ -1,6 +1,5 @@
 # Fichier - Classe - BddSQLiteManager
 
-import sqlite3
 from sqlite3 import Error
 from app.bdd_sqlite import BddSQLite
 

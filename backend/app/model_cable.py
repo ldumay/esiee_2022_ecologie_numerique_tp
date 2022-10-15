@@ -1,6 +1,6 @@
 # Fichier - Classe - Vent
 
-from app.calcul_temp import calcul_temp
+from app.calcul_temp import calcul_temp, calcul_temp_minutes
 
 class Cable:
 
@@ -13,7 +13,10 @@ class Cable:
 		self.wind_speed = wind_speed
 	
 	def calcul(self):
-		calcul_temp(self.temperature_cable, self.temperature_ambiant, self.intensity, self.wind_speed)
+		return calcul_temp(self.temperature_cable, self.temperature_ambiant, self.intensity, self.wind_speed)
+		
+	def calcul_minutes(self, minutes: int):
+		return calcul_temp_minutes(minutes, self.temperature_cable, self.temperature_ambiant, self.intensity, self.wind_speed)
 
 	# ToString
 	def __repr__(self):

@@ -1,6 +1,7 @@
 # Fichier - Controlle - Cable
 
 from app.bdd_sqlite_manager import BddSQLiteManager
+from app.model_cable import Cable
 
 # Entité - Cable
 class ControllerCable:
@@ -55,3 +56,11 @@ class ControllerCable:
 			return "[Cable-Delete] - La donnée a bien été supprimée de la BDD."
 		else:
 			return "[Cable-Delete] - La donnée n'a pas été supprimée de la BDD."
+
+	def getNextTemperature(self, minutes: int):
+		lastCable = self.BDDmanager.getLastAddedCable()
+		if lastCable:
+			cable = Cable('', lastCable[0],lastCable[1],lastCable[2],lastCable[3])
+			print(cable, flush=True)
+			return cable.calcul_minutes(minutes)
+		return "Empty Database"

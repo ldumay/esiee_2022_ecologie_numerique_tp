@@ -66,4 +66,4 @@ bdd.close()
 # migrate = Migrate(app, db)
 
 # Routes
-from backend.app import routes
+from app import routes

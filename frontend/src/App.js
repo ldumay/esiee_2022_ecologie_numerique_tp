@@ -9,7 +9,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Papa from 'papaparse';
 
 function App() {
 
@@ -42,7 +41,7 @@ function App() {
 		// get the fist line ['Heure', 'Intencite', 'temperature', 'vitesse vent\r']
 		const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
 		// get the other line as array of string ['1h,3A,16C,20km\r', '1h30,2.1A,16C,20km\r',...]
-		const csvRowsInit = string.slice(string.indexOf("\n") + 1).split("\n");
+		const csvRowsInit = string.slice(string.indexOf("\n") + 1).split("\r\n");
 
 		//clear array
 		const csvRows = csvRowsInit.filter(e =>  e)
@@ -59,10 +58,7 @@ function App() {
 				{});
 		});
 		setArray(array);
-
   };
-
-  const headerKeys = Object.keys(Object.assign({}, ...array));
 
 	return (
 		<div className="App">
@@ -75,7 +71,6 @@ function App() {
 						accept={".csv"}
 						onChange={handleOnChange}
 					/>
-
 					<Button
 						variant="contained"
 						onClick={(e) => {

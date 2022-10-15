@@ -139,7 +139,7 @@ function App(props) {
 						// 	handleCalculate(e);
 						// }}
 						onClick={async () => {
-							const response = await fetch("/bdd/create", {
+							const response = await fetch("/testapps", {
 								method: "POST",
 								headers: {
 									'Content-Type': 'application/json'

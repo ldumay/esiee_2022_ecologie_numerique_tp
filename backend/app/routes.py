@@ -17,9 +17,12 @@ from werkzeug.debug import console
 @app.route('/testapps', methods=['POST'])
 def home():
     data = request.get_json()
-    listData = list(data)
+    # listData = list(data)
 
-    return jsonpickle.encode(listData)
+    for d in data:
+        print(d["heure"], flush=True)
+
+    return jsonpickle.encode(data)
 
 
 # - - - [Data] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -106,9 +109,6 @@ def getCable(id):
 @app.post('/bdd/create')
 def createCable():
     if request.method == 'POST':
-        data = request.get_json()
-        listData = list(data)
-
         temperature_cable = request.form.get('temperature_cable')
         temperature_ambiant = request.form.get('temperature_ambiant')
         intensity = request.form.get('intensity')

@@ -10,7 +10,9 @@ from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
 # from app.controllers import ControllerVent
 @app.route('/testapps', methods=['GET', 'POST'])
 def home():
-    return "Hello, welcome to the apps"
+    data = request.json["array"]
+
+    return "Hello, welcome to the apps " + data
 
 
 @app.get("/data")

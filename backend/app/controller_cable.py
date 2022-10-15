@@ -5,10 +5,12 @@ from model_entity import Entity
 # Entité - Vent
 class ControllerEntity:
 	
+	# Constructeur
 	def __init__(self, bdd):
 		super().__init__()
 		self.bdd = bdd
 
+	# Méthode de récupération de toutes les données
 	def getAll(self):
 		try:
 			query = """SELECT * FROM entity"""
@@ -20,6 +22,7 @@ class ControllerEntity:
 		except:
 			return "[Entity-All] - Error"
 
+	# Méthode de récupération d'une donnée
 	def getEntity(self, id):
 		try:
 			query = """SELECT * FROM entity WHERE id = %s"""
@@ -31,6 +34,7 @@ class ControllerEntity:
 		except:
 			return "[Entity-Get] - Error"
 
+	# Méthode de création d'une donnée
 	def create(self, name, description, type):
 		try:
 			query = """INSERT INTO entity (name, description, type) VALUES (%s, %s, %s)"""
@@ -42,6 +46,7 @@ class ControllerEntity:
 		except:
 			return "[Entity-Create] - Error"
 
+	# Méthode de mise à jour d'une donnée
 	def update(self, id, name, description, type):
 		try:
 			query = """UPDATE entity SET name = %s, description = %s, type = %s WHERE id = %s"""
@@ -53,6 +58,7 @@ class ControllerEntity:
 		except:
 			return "[Entity-Update] - Error"
 
+	# Méthode de suppression d'une donnée
 	def delete(self, id):
 		try:
 			query = """DELETE FROM entity WHERE id = %s"""

@@ -8,17 +8,15 @@ class Entity(db.Model):
 
     # columns
     id = db.Column(db.Integer, primary_key=True)
-    heure = db.Column(db.DateTime, nullable=True)
-    intencite = db.Column(db.Float, nullable=True)
-    temperature = db.Column(db.Float, nullable=True)
-    vitesse = db.Column(db.Float, nullable=True)
+    name = db.Column(db.DateTime, nullable=True)
+    description = db.Column(db.Float, nullable=True)
+    type = db.Column(db.Float, nullable=True)
 
     # méthode qui s'exécutera la première fois que nous créerons un nouveau résultat 
-    def __init__(self, heure, intencite, temperature, vitesse):
-        self.heure = heure
-        self.intencite = intencite
-        self.temperature = temperature
-        self.vitesse = vitesse
+    def __init__(self, name, description, type):
+        self.name = name
+        self.description = description
+        self.type = type
 
     # méthode pour représenter l'objet lorsque nous l'interrogerons
     def __repr__(self):

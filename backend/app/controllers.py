@@ -1,6 +1,6 @@
 # Fichier Models
-from backend.app import bdd
-from backend.app.models import Vent
+from app import bdd
+from app.models import Vent
 
 
 # Entité - Vent

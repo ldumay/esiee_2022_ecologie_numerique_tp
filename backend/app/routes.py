@@ -3,7 +3,7 @@ from flask import request, redirect
 from app import app
 from flask import request
 
-from backend.app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
+from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
 
 
 # from app.models import Vent

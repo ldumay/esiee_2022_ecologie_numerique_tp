@@ -72,7 +72,7 @@ def sample_methodes():
 @app.get("/cables")
 def getCables():
     result = cableController.getAllCables()
-    return { "list": result }
+    return {"list": result}
 
 
 @app.post("/cables")
@@ -81,7 +81,8 @@ def postCables():
     # listData = list(data)
     if listCable:
         for cable in listCable:
-            cableController.create(cable["heure"], cable["temperature_ambiant"], cable["intensity"], cable["wind_speed"])
+            cableController.create(cable["temperature_cable"], cable["temperature_ambiant"], cable["intensity"],
+                                   cable["wind_speed"])
         return jsonpickle.encode(listCable)
     else:
         return "Error in data sent", 400

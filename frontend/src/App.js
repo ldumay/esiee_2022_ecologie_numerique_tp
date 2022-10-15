@@ -24,7 +24,7 @@ function App(props) {
 	const fileReader = new FileReader();
 
 	useEffect(()=>{
-		fetch("/data").then(response =>
+		fetch("/cables").then(response =>
 			response.json().then(data => {
 				setCalculatedData(data)
 				console.log(data)
@@ -32,6 +32,7 @@ function App(props) {
 		);
 	},[]);
 
+	console.log()
 
 	const calculate = () =>{
       APIService.SendData(array)
@@ -139,7 +140,7 @@ function App(props) {
 						// 	handleCalculate(e);
 						// }}
 						onClick={async () => {
-							const response = await fetch("/testapps", {
+							const response = await fetch("/cables", {
 								method: "POST",
 								headers: {
 									'Content-Type': 'application/json'

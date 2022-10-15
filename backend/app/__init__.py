@@ -7,13 +7,11 @@ from app.bdd_sqlite import BddSQLite
 from app.bdd_sqlite_manager import BddSQLiteManager
 from app.model_cable import Cable
 from app.controller_cable import ControllerCable
-from flask import Flask, request, session
+from flask import Flask
 
 # Application
 app = Flask(__name__)
 
-# Configuration de l'application
-app.config["DEBUG"] = True
 
 # - - - [BDD] - - - - - - -
 

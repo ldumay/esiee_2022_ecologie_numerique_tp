@@ -17,6 +17,12 @@ Flask se lance en suivant les routes défini dans un fichier app.py
 Les 2 premières étapes servent à configurer un projet en local, afin d'installer les dépendances que pour ce projet.
 Si vous voulez installer les dépendances en global, vous pouvez les ignorer
 
+## Déplacer dans le dossier
+
+```
+cd backend
+```
+
 #### 2.1 - Créer un environnement local 
 
 ```

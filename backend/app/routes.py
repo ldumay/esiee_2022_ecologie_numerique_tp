@@ -1,12 +1,24 @@
 # Fichier Routes
-from flask import request, redirect
 from app import app
-from flask import request
+from flask import request, redirect
 
 from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
-# from app.models import Vent
-# from app.controllers import ControllerVent
+from app.model_cable import Cable
+from app.controller_cable import ControllerCable
 
+
+# - - - [Test] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Test de la fonction calcul_temp
+@app.get("/test")
+def get_test():
+	test = calcul_scipy_temp(10, 0, 16, 200, 4)
+	return {"test": test}
+
+
+# - - - [Data] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Récupération des données
 @app.get("/data")
 def get_data():
 	minutes = request.args.get('time', type=int) or request.form.get('time', type=int) or 30
@@ -20,6 +32,7 @@ def get_data():
 
 	return {"temperature": temp}
 
+# Envoyer de données
 @app.post("/data")
 def post_data():
 	# Recup les données dans le post
@@ -40,15 +53,10 @@ def post_data():
 		}
 	}
 
-@app.get("/test")
-def get_test():
-	test = calcul_scipy_temp(10, 0, 16, 200, 4)
-	return {"test": test}
 
+# - - - [Exemple de gestion de méthodes] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
-# - - - - - - [Exemple de gestion de méthodes] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+# Exemple de gestion de méthodes
 @app.route('/sample_methodes', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def sample_methodes():
     if request.method=='GET':
@@ -62,50 +70,63 @@ def sample_methodes():
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
-# - - - - - - [BDD] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# GET - Récupération du contenu de la BDD
-@app.get("/bdd")
-def datas_all():
+# - - - [Cable] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# GET - Récupération du contenu de la table Cable
+@app.get("/cables")
+def getCables():
     if request.method=='GET':
         result = ''
-        # result = ControllerVent.all()
+        result = app.cable.getAll()
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
+# GET - Récupération du contenu cable de la table Cable
+@app.get("/cable/<int:id>")
+def getCable(id):
+    if request.method=='GET':
+        result = ''
+        result = app.cable.getCable(id)
+        return result
+    else:
+        return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
+
+# POST - Création d'un contenu cable et ajout dans la table Cable
 @app.post('/bdd/create')
-def datas_create():
+def createCable():
     if request.method=='POST':
-        heure = request.form.get('heure')
-        intencite = request.form.get('intencite')
-        temperature = request.form.get('temperature')
-        vitesse = request.form.get('vitesse')
+        temperature_cable = request.form.get('temperature_cable')
+        temperature_ambiant = request.form.get('temperature_ambiant')
+        intensity = request.form.get('intensity')
+        wind_speed = request.form.get('wind_speed')
         result = ''
-        # result = ControllerVent.create(heure, intencite, temperature, vitesse)
+        result = app.cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
+# PUT - Mise à jour d'un contenu cable dans la table Cable
 @app.put('/bdd/update/<int:id>')
-def datas_update(id):
+def updateCable(id):
     if request.method=='PUT':
-        form = request.form
-        heure = form.get('heure')
-        intencite = form.get('intencite')
-        temperature = form.get('temperature')
-        vitesse = form.get('vitesse')
+        temperature_cable = request.form.get('temperature_cable')
+        temperature_ambiant = request.form.get('temperature_ambiant')
+        intensity = request.form.get('intensity')
+        wind_speed = request.form.get('wind_speed')
         result = ''
-        # result = ControllerVent.update(id, heure, intencite, temperature, vitesse)
+        result = app.cable.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
 
+# DELETE - Supprimer d'un contenu cable dans la table Cable
 @app.delete('/bdd/delete/<int:id>')
-def datas_delete(id):
+def deleteCable(id):
     if request.method=='PUT':
         result = ''
-        # result = ControllerVent.delete(id)
+        result = app.cable.delete(id)
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"

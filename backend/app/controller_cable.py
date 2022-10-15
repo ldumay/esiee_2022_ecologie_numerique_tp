@@ -1,9 +1,8 @@
-# Fichier - Controlle - Entity
-from app import db
-from model_entity import Entity
+# Fichier - Controlle - Cable
+from .model_cable import Cable
 
-# Entité - Vent
-class ControllerEntity:
+# Entité - Cable
+class ControllerCable:
 	
 	# Constructeur
 	def __init__(self, bdd):
@@ -11,61 +10,70 @@ class ControllerEntity:
 		self.bdd = bdd
 
 	# Méthode de récupération de toutes les données
+	@staticmethod
 	def getAll(self):
 		try:
-			query = """SELECT * FROM entity"""
+			query = """SELECT * FROM cable"""
 			result = self.bdd.getAll(query)
 			if len(result)>0:
 				return [ { result } ]
 			else:
-				return "Il n'y a pas de données dans la BDD."
+				return "[Cable-All] - Il n'y a pas de données dans la BDD."
 		except:
-			return "[Entity-All] - Error"
+			return "[Cable-All] - Error"
 
 	# Méthode de récupération d'une donnée
-	def getEntity(self, id):
+	@staticmethod
+	def getCable(self, id):
 		try:
-			query = """SELECT * FROM entity WHERE id = %s"""
+			query = """SELECT * FROM cable WHERE id = %s"""
 			result = self.bdd.getOnce(query, (id,))
 			if result:
 				return result
 			else:
-				return "La donnée n'a pas été trouvée dans la BDD."
+				return "[Cable-Get] - La donnée n'a pas été trouvée dans la BDD."
 		except:
-			return "[Entity-Get] - Error"
+			return "[Cable-Get] - Error"
 
 	# Méthode de création d'une donnée
-	def create(self, name, description, type):
+	@staticmethod
+	def create(self, temperature_cable, temperature_ambiant, intensity, wind_speed):
 		try:
-			query = """INSERT INTO entity (name, description, type) VALUES (%s, %s, %s)"""
-			result = self.bdd.insert(query, (name, description, type))
+			query = """INSERT INTO cable
+				(temperature_cable, temperature_ambiant, intensity, wind_speed)
+				VALUES
+				(%s, %s, %s, %s)
+			"""
+			result = self.bdd.insert(query, (temperature_cable, temperature_ambiant, intensity, wind_speed))
 			if result:
-				return "La donnée a bien été ajoutée dans la BDD."
+				return "[Cable-Create] - La donnée a bien été ajoutée dans la BDD."
 			else:
-				return "La donnée n'a pas été ajoutée dans la BDD."
+				return "[Cable-Create] - La donnée n'a pas été ajoutée dans la BDD."
 		except:
-			return "[Entity-Create] - Error"
+			return "[Cable-Create] - Error"
 
 	# Méthode de mise à jour d'une donnée
-	def update(self, id, name, description, type):
+	@staticmethod
+	def update(self, id, temperature_cable, temperature_ambiant, intensity, wind_speed):
 		try:
-			query = """UPDATE entity SET name = %s, description = %s, type = %s WHERE id = %s"""
-			result = self.bdd.update(query, (name, description, type, id))
+			query = """UPDATE cable SET temperature_cable = %s, temperature_ambiant = %s, intensity = %s, wind_speed = %s WHERE id = %s"""
+			result = self.bdd.update(query, (temperature_cable, temperature_ambiant, intensity, wind_speed))
 			if result:
-				return "La donnée a bien été modifiée dans la BDD."
+				return "[Cable-Update] - La donnée a bien été modifiée dans la BDD."
 			else:
-				return "La donnée n'a pas été modifiée dans la BDD."
+				return "[Cable-Update] - La donnée n'a pas été modifiée dans la BDD."
 		except:
-			return "[Entity-Update] - Error"
+			return "[Cable-Update] - Error"
 
 	# Méthode de suppression d'une donnée
+	@staticmethod
 	def delete(self, id):
 		try:
-			query = """DELETE FROM entity WHERE id = %s"""
+			query = """DELETE FROM cable WHERE id = %s"""
 			result = self.bdd.delete(query, (id,))
 			if result:
-				return "La donnée a bien été supprimée de la BDD."
+				return "[Cable-Delete] - La donnée a bien été supprimée de la BDD."
 			else:
-				return "La donnée n'a pas été supprimée de la BDD."
+				return "[Cable-Delete] - La donnée n'a pas été supprimée de la BDD."
 		except:
-			return "[Entity-Delete] - Error"
+			return "[Cable-Delete] - Error"

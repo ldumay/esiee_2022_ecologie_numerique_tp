@@ -70,7 +70,8 @@ class BddSQLite:
             cursor = self.conn.cursor()
             cursor.execute(query)
             self.conn.commit()
-            return len(cursor.fetchall())
+            rows = cursor.fetchall()
+            return rows[0]
         except Error as e:
             print('[BDD] Error !')
             print(e)

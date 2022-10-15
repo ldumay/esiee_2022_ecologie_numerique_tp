@@ -5,6 +5,8 @@ from datetime import datetime
 from sqlite3 import Error
 from app.bdd_sqlite import BddSQLite
 from app.bdd_sqlite_manager import BddSQLiteManager
+from app.model_cable import Cable
+from app.controller_cable import ControllerCable
 from flask import Flask, request, session
 
 # Application
@@ -18,13 +20,8 @@ app.config["DEBUG"] = True
 # Initialisation du mananger de la BDD
 bdd = BddSQLiteManager()
 
-# - - - [BDD] - - - - - - -
+app.cable = ControllerCable(bdd)
 
-# Rajout des anciens import pour éviter les messages d'erreur sur beaucoup d'autre fichier
-# from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate
-# db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
-
-# Routes
+# - - - [Routes] - - - - - - -
+# Gestion des routes
 from app import routes

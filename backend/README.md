@@ -90,7 +90,7 @@ python app.py
 - **[GET]** Test : [127.0.0.1:5000/test/](http://127.0.0.1:5000/test/) ==> View : [datas-test]
 - **[GET]** Datas : [127.0.0.1:5000/data/](http://127.0.0.1:5000/data/) ==> View : [datas]
 
-- **[GET-POST-PUT-DELETE]** BDD : `http://localhost:5000/sample_methodes` ==> View [result]
+- **[GET-POST-PUT-DELETE]** Sample methodes : `http://localhost:5000/sample_methodes` ==> View [result]
 
 - **[GET]** BDD : `http://127.0.0.1:5000/bdd/` ==> View : [result]
 - **[POST]** BDD : `http://127.0.0.1:5000/bdd/create` ==> View : [result]

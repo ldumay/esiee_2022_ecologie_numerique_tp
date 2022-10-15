@@ -5,8 +5,8 @@ from datetime import datetime
 from flask import Flask, request, session
 from sqlite3 import Error
 
-from backend.app.managerbddsqlite import ManagerBddSQLite
-from backend.app.config import Config
+from app.managerbddsqlite import ManagerBddSQLite
+from app.config import Config
 
 # Application
 app = Flask(__name__)
@@ -66,4 +66,4 @@ bdd.close()
 # migrate = Migrate(app, db)
 
 # Routes
-from backend.app import routes
+from app import routes

@@ -1,5 +1,5 @@
 // Importing modules
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./App.css";
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
@@ -17,11 +17,23 @@ function App(props) {
 	const [file, setFile] = useState();
 	//object
 	const [array, setArray] = useState([]);
+	const [calculatedData, setCalculatedData] = useState([]);
+
 
 	const fileReader = new FileReader();
 
+	useEffect(()=>{
+		fetch("/testapps").then(response =>
+			response.json().then(data => {
+				setCalculatedData(data)
+				console.log(data)
+			})
+		);
+	},[]);
+
+
 	const calculate = () =>{
-      APIService.SendData({array})
+      APIService.SendData(array)
       .then((response) => props.SendData(response))
       .catch(error => console.log('error',error))
     }
@@ -30,10 +42,12 @@ function App(props) {
 	const handleOnChange = (e) => {
         setFile(e.target.files[0]);
     };
+
 	const handleCalculate=(e)=>{
 		e.preventDefault();
 		calculate();
 		}
+
 	/** event on submit get the content of the file*/
 	const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -117,13 +131,26 @@ function App(props) {
 							</TableBody>
 						</Table>
 					</TableContainer>
+
 					<Button
 						variant="contained"
-						onClick={(e) => {
-							handleCalculate(e);
+						// onClick={(e) => {
+						// 	handleCalculate(e);
+						// }}
+						onClick={async () => {
+							const response = await fetch("/testapps", {
+								method: "POST",
+								headers: {
+									'Content-Type': 'application/json'
+								},
+								body: JSON.stringify(array)
+							})
+							if (response.ok) {
+								console.log("it worked")
+							}
 						}}
 					>
-					calculate
+						calculate
 					</Button>
 				</div>
 			</header>

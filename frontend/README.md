@@ -1,10 +1,31 @@
 # ESIEE - 2022 - Ecologie numerique TP
 
-## Frontend
-run app :
-npm install => if error run the indicated command
+[Retour à l'accueil](../../)
 
-npm start to run the app
+## Frontend - App Web - React JS
 
-go to the url : http://192.168.1.24:3000/
-## Pré-requis :
+## Déplacer dans le dossier
+
+```
+cd frontend
+```
+
+## Installation des dépendances
+
+```
+npm install
+```
+
+## Démarrage de l'application
+
+```
+npm start
+```
+
+> if error run the indicated command
+> 
+> npm start to run the app
+
+## Accéssibilité de l'application
+
+[http://192.168.1.24:3000/](http://192.168.1.24:3000/)

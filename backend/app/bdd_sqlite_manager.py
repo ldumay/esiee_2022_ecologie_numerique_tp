@@ -99,7 +99,7 @@ class BddSQLiteManager:
 		result = self.getBDD().count(query=query)
 		return result
 
-	def insertCable(self, temp_cable: float, temp_amb: float, intensity: int, wind_speed: float):
+	def insertCable(self, temp_cable: float, temp_amb: float, intensity: float, wind_speed: float):
 		query = """INSERT INTO cable
 			(temperature_cable, temperature_ambiant, intensity, wind_speed)
 			VALUES
@@ -108,7 +108,7 @@ class BddSQLiteManager:
 		result = self.getBDD().getExecute(query=query)
 		return result
 
-	def updateCable(self, id: int, temp_cable: float, temp_amb: float, intensity: int, wind_speed: float):
+	def updateCable(self, id: int, temp_cable: float, temp_amb: float, intensity: float, wind_speed: float):
 		query = """UPDATE cable
 			SET temperature_cable = {}, temperature_ambiant = {}, intensity = {}, wind_speed = {}
 			WHERE id = {}""".format(temp_cable, temp_amb, intensity, wind_speed, id)

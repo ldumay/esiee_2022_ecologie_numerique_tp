@@ -13,7 +13,7 @@ app = Flask(__name__)
 # Initialisation du mananger de la BDD
 bdd = BddSQLiteManager()
 
-cable = ControllerCable(bdd)
+cableController = ControllerCable(bdd)
 
 # - - - [Routes] - - - - - - -
 # Gestion des routes

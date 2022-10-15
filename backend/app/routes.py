@@ -1,5 +1,5 @@
 # Fichier Routes
-from app import app, cable
+from app import app, cableController
 from flask import request, redirect
 import jsonpickle
 from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
@@ -30,7 +30,7 @@ def home():
 def get_data():
     minutes = request.args.get('time', type=int) or request.form.get('time', type=int) or 30
     # calcul sur les 30 prochaines minutes
-    temp = cable.getNextTemperature(minutes)
+    temp = cableController.getNextTemperature(minutes)
     return {"temperature": temp}
 
 # Envoyer de données
@@ -71,8 +71,19 @@ def sample_methodes():
 # GET - Récupération du contenu de la table Cable
 @app.get("/cables")
 def getCables():
-    result = cable.getAllCables()
+    result = cableController.getAllCables()
     return { "list": result }
+
+@app.post("/cables")
+def postCables():
+    listCable = request.get_json()
+    # listData = list(data)
+    if listCable:
+        for cable in listCable:
+            cableController.create(cable["heure"], cable["temperature_ambiant"], cable["intensity"], cable["wind_speed"])
+        return jsonpickle.encode(listCable)
+    else:
+        return "Error in data sent", 400
 
 
 # GET - Récupération du contenu cable de la table Cable
@@ -80,7 +91,7 @@ def getCables():
 def getCable():
     id = request.args.get('id', type=int) or request.form.get('id', type=int)
     if id:
-        result = cable.getCable(id)
+        result = cableController.getCable(id)
         return result
     else:
         return "id not define", 404
@@ -93,7 +104,7 @@ def createCable():
     temperature_ambiant = request.form.get('temperature_ambiant', type=float) or 0
     intensity = request.form.get('intensity', type=float) or 0
     wind_speed = request.form.get('wind_speed', type=float) or 0
-    result = cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
+    result = cableController.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
     return result
 
 
@@ -106,7 +117,7 @@ def updateCable():
         temperature_ambiant = request.form.get('temperature_ambiant', type=float) or 0
         intensity = request.form.get('intensity', type=float) or 0
         wind_speed = request.form.get('wind_speed', type=float) or 0
-        result = cable.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
+        result = cableController.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
         return result
     else:
         return "id not define", 404
@@ -117,7 +128,7 @@ def updateCable():
 def deleteCable():
     id = request.args.get('id', type=int) or request.form.get('id', type=int)
     if id:
-        result = cable.delete(id)
+        result = cableController.delete(id)
         return result
     else:
         return "id not define", 404

@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import APIService from "./APIService";
+import {deprecate} from "@testing-library/jest-dom/dist/utils";
 
 function App(props) {
 
@@ -22,14 +23,14 @@ function App(props) {
 
 	const fileReader = new FileReader();
 
-	useEffect(()=>{
-		fetch("/testapps").then(response =>
-			response.json().then(data => {
-				setCalculatedData(data)
-				console.log(data)
-			})
-		);
-	},[]);
+	// useEffect(()=>{
+	// 	fetch("/testapps").then(response =>
+	// 		response.json().then(data => {
+	// 			setCalculatedData(data)
+	// 			console.log(data)
+	// 		})
+	// 	);
+	// },[]);
 
 
 	const calculate = () =>{
@@ -43,10 +44,10 @@ function App(props) {
         setFile(e.target.files[0]);
     };
 
-	const handleCalculate=(e)=>{
-		e.preventDefault();
-		calculate();
-		}
+	// const handleCalculate=(e)=>{
+	// 	e.preventDefault();
+	// 	calculate();
+	// 	}
 
 	/** event on submit get the content of the file*/
 	const handleOnSubmit = (e) => {
@@ -122,10 +123,10 @@ function App(props) {
 								{array.map((array) => (
 								<TableRow key={array.heure} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 								  <TableCell align="right">{array.heure}</TableCell>
-								  <TableCell align="right">{array.intensite}</TableCell>
-								  <TableCell align="right">{array.temperature_ext}</TableCell>
-								  <TableCell align="right">{array.temperature_int}</TableCell>
-								  <TableCell align="right">{array.vitesseVent}</TableCell>
+								  <TableCell align="right">{array.intensity}</TableCell>
+								  <TableCell align="right">{array.temperature_cable}</TableCell>
+								  <TableCell align="right">{array.temperature_ambiant}</TableCell>
+								  <TableCell align="right">{array.wind_speed}</TableCell>
 								</TableRow>
 								))}
 							</TableBody>
@@ -138,7 +139,7 @@ function App(props) {
 						// 	handleCalculate(e);
 						// }}
 						onClick={async () => {
-							const response = await fetch("/testapps", {
+							const response = await fetch("/bdd/create", {
 								method: "POST",
 								headers: {
 									'Content-Type': 'application/json'
@@ -148,6 +149,7 @@ function App(props) {
 							if (response.ok) {
 								console.log("it worked")
 							}
+
 						}}
 					>
 						calculate

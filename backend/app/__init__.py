@@ -10,10 +10,13 @@ from backend.app.config import Config
 
 # Application
 app = Flask(__name__)
+# secret key for cookies
+
 
 # Configuration de l'application
 app.config["DEBUG"] = True
 app.config.from_object(Config)
+app.config['SECRET_KEY'] = 'dnjqkndkjsndjsdksqshfibvdhhjbsui'
 
 # - - - [BDD] - - - - - - -
 
@@ -63,4 +66,4 @@ bdd.close()
 # migrate = Migrate(app, db)
 
 # Routes
-from app import routes
+from backend.app import routes

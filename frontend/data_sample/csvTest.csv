@@ -1,4 +1,4 @@
-﻿heure,intensite,temperature_ext,temperature_int,vitesseVent
+﻿heure,intensity,temperature_cable,temperature_ambiant,wind_speed
 1h,3,16,12,20
 1h30,2.1,16,12,20
 2H,2.7,16,12,20

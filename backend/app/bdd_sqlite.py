@@ -19,11 +19,11 @@ class BddSQLite:
         try:
             self.conn = sqlite3.connect(self.file)
             print('[BDD] Connected !')
-        except Error as e:
+        except Error as err:
             print('[BDD] Error !')
-            print(e)
+            print(err)
             self.close()
-            return None
+            return False
 
     # Exécuter une requète
     def getExecute(self, query):
@@ -32,11 +32,11 @@ class BddSQLite:
             cursor.execute(query)
             self.conn.commit()
             return True
-        except Error as e:
+        except Error as err:
             print('[BDD] Error !')
-            print(e)
+            print(err)
             self.close()
-            return None
+            return False
 
     # Récupérer plusieurs données
     def getAll(self, query):
@@ -45,11 +45,11 @@ class BddSQLite:
             cursor.execute(query)
             self.conn.commit()
             return cursor.fetchall()
-        except Error as e:
+        except Error as err:
             print('[BDD] Error !')
-            print(e)
+            print(err)
             self.close()
-            return None
+            return []
 
     # Récupérer une donnée
     def getOnce(self, query):
@@ -58,11 +58,11 @@ class BddSQLite:
             cursor.execute(query)
             self.conn.commit()
             return cursor.fetchone()
-        except Error as e:
+        except Error as err:
             print('[BDD] Error !')
-            print(e)
+            print(err)
             self.close()
-            return None
+            return False
 
     # Récupérer le nombre de ligne
     def count(self, query):
@@ -72,11 +72,11 @@ class BddSQLite:
             self.conn.commit()
             rows = cursor.fetchall()
             return rows[0]
-        except Error as e:
+        except Error as err:
             print('[BDD] Error !')
-            print(e)
+            print(err)
             self.close()
-            return None
+            return False
 
     # Fermer la connexion
     def close(self):

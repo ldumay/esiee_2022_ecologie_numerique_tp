@@ -1,5 +1,5 @@
 # Fichier Routes
-from app import app
+from app import app, cable
 from flask import request, redirect
 
 from app.calcul_temp import calcul_temp_minutes, calcul_scipy_temp
@@ -78,7 +78,7 @@ def sample_methodes():
 def getCables():
     if request.method=='GET':
         result = ''
-        result = app.cable.getAll()
+        result = cable.getAll()
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
@@ -88,7 +88,7 @@ def getCables():
 def getCable(id):
     if request.method=='GET':
         result = ''
-        result = app.cable.getCable(id)
+        result = cable.getCable(id)
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
@@ -101,8 +101,7 @@ def createCable():
         temperature_ambiant = request.form.get('temperature_ambiant')
         intensity = request.form.get('intensity')
         wind_speed = request.form.get('wind_speed')
-        result = ''
-        result = app.cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
+        result = cable.create(temperature_cable, temperature_ambiant, intensity, wind_speed)
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
@@ -116,7 +115,7 @@ def updateCable(id):
         intensity = request.form.get('intensity')
         wind_speed = request.form.get('wind_speed')
         result = ''
-        result = app.cable.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
+        result = cable.update(id, temperature_cable, temperature_ambiant, intensity, wind_speed)
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"
@@ -126,7 +125,7 @@ def updateCable(id):
 def deleteCable(id):
     if request.method=='PUT':
         result = ''
-        result = app.cable.delete(id)
+        result = cable.delete(id)
         return result
     else:
         return "Je ne sais pas quoi faire avec ta requète 🤷‍♂️"

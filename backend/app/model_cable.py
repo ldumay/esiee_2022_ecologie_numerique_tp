@@ -1,6 +1,6 @@
 # Fichier - Classe - Vent
 
-from backend.app.routes import calcul_temp
+from app.calcul_temp import calcul_temp
 
 class Cable:
 
@@ -12,9 +12,9 @@ class Cable:
 		self.intensity = intensity
 		self.wind_speed = wind_speed
 	
-	def calcul(self,temperature_cable: int, temperature_ambiant: int, intensity: int, wind_speed: int):
-		calcul_temp(self.heure,self.tempext,self.intencite,self.tempint)
+	def calcul(self):
+		calcul_temp(self.temperature_cable, self.temperature_ambiant, self.intensity, self.wind_speed)
 
 	# ToString
 	def __repr__(self):
-		return '<id {}>'.format(self.id)
+		return '<id {}>'.format(self)

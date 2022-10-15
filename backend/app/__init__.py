@@ -20,7 +20,7 @@ app.config["DEBUG"] = True
 # Initialisation du mananger de la BDD
 bdd = BddSQLiteManager()
 
-app.cable = ControllerCable(bdd)
+cable = ControllerCable(bdd)
 
 # - - - [Routes] - - - - - - -
 # Gestion des routes

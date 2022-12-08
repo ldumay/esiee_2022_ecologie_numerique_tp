@@ -2,9 +2,9 @@
 
 Ceci est un projet d'une application **Web React JS** et d'une **API Flask Python**.
 
-## Présentation PowerPoint du 
+## Présentation PowerPoint du projet
 
-Nous avons réaliser une présentation PowerPoint décrivant le projet disponible [ici](/_docs/Presentation.pdf).
+Nous avons réaliser une présentation PowerPoint décrivant le projet disponible [ici](/_docs/Presentation_Ecologie_Numerique.pdf).
 
 ## Les guides d'utilisation sont disponibles ci-dessous
 

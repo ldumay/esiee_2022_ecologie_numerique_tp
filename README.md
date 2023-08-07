@@ -1,4 +1,4 @@
-# ESIEE - 2022 - Ecologie numerique TP
+# ESIEE-IT - 2022 - Ecologie numerique TP
 
 Ceci est un projet d'une application **Web React JS** et d'une **API Flask Python**.
 

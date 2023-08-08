@@ -1,6 +1,6 @@
 # ESIEE-IT - 2022 - Ecologie numerique TP
 
-> 🚨 **Projet déplacer ici ▶▶ : [https://github.com/2023-esiee-projectlab/ecologie_numerique](https://github.com/2023-esiee-projectlab/ecologie_numerique)**
+> 🚨 **Projet déplacer ici ▶▶ : [https://github.com/2023-esiee-projectlab/M2_ecologie_numerique](https://github.com/2023-esiee-projectlab/M2_ecologie_numerique)**
 
 Ceci est un projet d'une application **Web React JS** et d'une **API Flask Python**.
 
